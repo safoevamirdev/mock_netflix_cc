@@ -36,6 +36,23 @@
     transform: rotate(360deg);
   }
 } */
+/* .container {
+  position: absolute;
+} */
+
+.myLogo {
+  -webkit-transform:rotate(310deg);
+  position: absolute;
+  top: 15px;
+  left: -25px;
+  font-size: 18px;
+}
+
+.myLogo { 
+  width: 10%;
+  height: auto;
+  opacity: 0.8;
+}
 
 #content {
   position: relative;

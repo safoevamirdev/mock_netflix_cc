@@ -50,7 +50,10 @@ class MainContainer extends React.Component{
     render(){
 
         return ( 
-            <Container>
+            <Container className="container">
+                <img className="myLogo"
+                src="https://cdn.arstechnica.net/wp-content/uploads/2018/08/Netflix_Logo_Digital_Video-800x450.jpg"
+                alt="logo"/>
                 <h4>My list</h4>
                 <Row>
                     {this.renderMyList()}
