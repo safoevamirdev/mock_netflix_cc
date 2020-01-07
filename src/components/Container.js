@@ -5,14 +5,19 @@ import { Container, Row, Col} from 'react-bootstrap'
 
 import MyList from './MyList'
 import Recommendations from './Recommendations'
+import Titles from './Titles'
 
 class MainContainer extends React.Component{
 
     renderMyList = () => {
         let myList = this.props.myList
+        let mouseInside = this.props.isMouseInside
+        let mouseStatus = this.props.mouseStatus
         return myList.map(movie => (
             <Col key={movie.id} xs lg="2" >
                     <MyList
+                        mouseStatus={mouseStatus}
+                        mouseInside={mouseInside}
                         onRemove={this.props.removeFromList}
                         movie={movie}
                         title={movie.title}
@@ -24,10 +29,15 @@ class MainContainer extends React.Component{
     }
     
     renderRec = () => {
+        
         let recList = this.props.recommendations
+        let mouseInside = this.props.isMouseInside
+        let mouseStatus = this.props.mouseStatus
         return recList.map(movie => (
             <Col key={movie.id} xs lg="2">
                 <Recommendations
+                    mouseStatus={mouseStatus}
+                    mouseInside={mouseInside}
                     movie={movie}
                     onAdd={this.props.addToList}
                     title={movie.title}
@@ -38,17 +48,27 @@ class MainContainer extends React.Component{
         ))
     }
     render(){
+
         return ( 
             <Container>
-                <h1>My list</h1>
+                <h4>My list</h4>
                 <Row>
                     {this.renderMyList()}
                 </Row>
                 <hr/>
-                <h1>Recommended</h1>
+                <h4>Recommended</h4>
                 <Row >
                     {this.renderRec()}
                 </Row>
+                <hr/>
+                <h4>
+                    Titles from My List
+                </h4>
+                <Row>
+                    {this.props.myList.map(movie => 
+                     <Titles key={movie.id} title={movie.title} /> )}
+                </Row>
+
             </Container>
         )
     }
@@ -56,13 +76,15 @@ class MainContainer extends React.Component{
 const mapStateToProps = state => {
     return {
         myList: state.mylist,
-        recommendations: state.recommendations
+        recommendations: state.recommendations,
+        mouseStatus: state.isMouseInside
     }
   }
   const mapDispatchToProps = dispatch => {
     return {
       addToList: (movie) => dispatch({type: actionTypes.ADD_TO_LIST, payload: movie}),
-      removeFromList: (movie) => dispatch({type: actionTypes.REMOVE_FROM_LIST, payload: movie})
+      removeFromList: (movie) => dispatch({type: actionTypes.REMOVE_FROM_LIST, payload: movie}),
+      isMouseInside: (boolean) => dispatch({type: actionTypes.IS_MOUSE_INSIDE, payload: boolean})
     }
   }
 

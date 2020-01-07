@@ -1,6 +1,7 @@
 import * as actionTypes from './actions'
 
 const initialState = {
+        isMouseInside: false,
         mylist : [  
         {
         'title': 'Futurama',
@@ -53,6 +54,16 @@ switch(action.type){
         let myList = state.mylist
         let resultArr = myList.filter(movie => movie.id !== action.payload.id)
         return {...state, mylist: resultArr}
+    
+    case actionTypes.IS_MOUSE_INSIDE:
+        
+        if(action.payload){
+            let bool = true
+            return {...state, isMouseInside: bool}
+        }else{
+            let bool = false
+            return {...state, isMouseInside: bool}
+        }
     default:
         return state;
     }
